@@ -1,8 +1,16 @@
 package com.nam.exception;
 
-public class TuitionException extends Exception {
+import org.springframework.http.HttpStatus;
 
+public class TuitionException extends CustomApplicationException {
+
+    protected HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
     public TuitionException(String message) {
         super(message);
+    }
+
+    @Override
+    public HttpStatus getHttpStatus() {
+        return httpStatus;
     }
 }

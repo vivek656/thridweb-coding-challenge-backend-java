@@ -11,6 +11,10 @@ logging:
 spring:
   profiles:
     active: dev
+  sql:
+    init:
+      mode: never
+      data-locations: classpath:roles.sql
 server:
   port: 5454
 ---
@@ -26,9 +30,12 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
-    show-sql: 'true'
-
-
+    show-sql: true
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:roles.sql
 ---
 
 spring:

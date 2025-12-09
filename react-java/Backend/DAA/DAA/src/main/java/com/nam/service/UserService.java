@@ -10,6 +10,8 @@ import com.nam.payload.request.SignupTeacherRequest;
 public interface UserService {
     public User findUserById(Long userId) throws UserException;
 
+    User findUserByEmail(String email) throws UserException;
+
     public User findUserProfileByJwt(String jwt) throws UserException;
 
     public void deleteUser(Long id) throws UserException;

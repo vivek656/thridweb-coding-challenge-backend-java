@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -33,15 +34,18 @@ public class UserServiceImpl implements UserService {
         throw new UserException("User not found with id: " + userId);
     }
 
+    @Override
+    public User findUserByEmail(String email) throws UserException {
+        Objects.requireNonNull(email, "email should not be null");
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new UserException("User Not Found with email: " + email));
+    }
+
 
     @Override
     public User findUserProfileByJwt(String jwt) throws UserException {
         String email = jwtProvider.getEmailFromToken(jwt);
-
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UserException("User Not Found with email: " + email));
-
-        return user;
+        return findUserByEmail(email);
     }
 
     @Override
