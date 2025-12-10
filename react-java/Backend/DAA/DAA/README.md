@@ -4,6 +4,7 @@
 
 - Added crud operations in [AuthController](src/main/java/com/nam/controller/AuthController.java)
 - update [pom.xml](pom.xml) to add library to fix compile issues in test classes
+- added sql script [roles.sql](src/main/resources/roles.sql) that run once on startup to initialize roles, in prod that has to done using liquibase or db migration tools or manually.
 - Added exception handlers in [GlobalExceptionHandler](src/main/java/com/nam/advice/GlobalExceptionHandler.java)
 - [CustomApplicationException](src/main/java/com/nam/exception/CustomApplicationException.java) to properly format
   [ApiError](src/main/java/com/nam/payload/response/ApiErrorResponse.java)
