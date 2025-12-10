@@ -46,7 +46,6 @@ class AuthControllerTest {
     private final UserService userService = mock(UserService.class);
     private final AuthenticationManager authenticationManager = mock(AuthenticationManager.class);
     private final RefreshTokenService refreshTokenService = mock(RefreshTokenService.class);
-    private AuthController authController;
 
 
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -60,7 +59,7 @@ class AuthControllerTest {
 
     @BeforeEach
     void beforeAll() {
-        authController = new AuthController(
+        AuthController authController = new AuthController(
                 jwtProvider, userService, authenticationManager, refreshTokenService
         );
         mockMvc = MockMvcBuilders.standaloneSetup(authController)
@@ -101,7 +100,7 @@ class AuthControllerTest {
 
     @AfterEach
     void afterEach() {
-        //  reset(userService,authenticationManager,refreshTokenService,jwtProvider);
+        reset(userService,authenticationManager,refreshTokenService,jwtProvider);
     }
 
     @Test
