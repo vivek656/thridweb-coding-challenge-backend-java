@@ -15,3 +15,10 @@
 ## postman collection with examples
 
 import the postman collection [here](student_APP.postman_collection.json) for example of working APIs
+
+
+## improvemnts needed
+- use liquibase or database migration manager to create or update tables in place of hibernate
+- add logging to improve observability and debugging
+- use new language features like records etc for DTOs. (optional)
+- abstract out getting the logged in user , using authorization service etc in place of exposing spring beans in controller 
