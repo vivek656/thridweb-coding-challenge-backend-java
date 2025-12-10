@@ -57,11 +57,7 @@ public class UserServiceImpl implements UserService {
     public Student createStudent(SignupStudentRequest studentRequest) throws UserException {
         userRepository.findByEmail(studentRequest.getEmail())
                 .ifPresent(user -> {
-                    try {
-                        throw new UserException("User already exists with email: " + studentRequest.getEmail());
-                    } catch (UserException e) {
-                        throw new RuntimeException(e);
-                    }
+                    throw new UserException("User already exists with email: %s".formatted(studentRequest.getEmail()));
                 });
         //Immutable
         Set<Role> roles = Set.of(roleRepository.findByName(ERole.ROLE_STUDENT).get());
@@ -84,11 +80,7 @@ public class UserServiceImpl implements UserService {
     public Teacher createTeacher(SignupTeacherRequest teacherRequest) throws UserException {
         userRepository.findByEmail(teacherRequest.getEmail())
                 .ifPresent(user -> {
-                    try {
-                        throw new UserException("User already exists with email: " + teacherRequest.getEmail());
-                    } catch (UserException e) {
-                        throw new RuntimeException(e);
-                    }
+                    throw new UserException("User already exists with email: %s".formatted(teacherRequest.getEmail()));
                 });
         Set<Role> roles = Set.of(roleRepository.findByName(ERole.ROLE_TEACHER).get());
 /*        Set<Role> roles = new HashSet<>();

@@ -12,9 +12,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler{
 
-
     @ExceptionHandler(CustomApplicationException.class)
-    public ResponseEntity<Object> handleNamException(CustomApplicationException ex, HttpServletRequest request) {
+    public ResponseEntity<ApiErrorResponse> handleCustomApplicationException(CustomApplicationException ex, HttpServletRequest request) {
         ApiErrorResponse apiErrorResponse = ApiErrorResponse.builder()
                 .status(ex.getHttpStatus().value())
                 .error(ex.getHttpStatus().getReasonPhrase())
@@ -32,9 +31,8 @@ public class GlobalExceptionHandler{
         throw ex;
     }
 
-
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<Object> handleException(Exception ex, HttpServletRequest request) {
+    public ResponseEntity<ApiErrorResponse> handleException(Exception ex, HttpServletRequest request) {
 
         ApiErrorResponse apiErrorResponse = ApiErrorResponse.builder()
                 .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
